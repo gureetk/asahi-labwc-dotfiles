@@ -69,6 +69,14 @@ def run(*cmd):
         pass
 
 
+def dark_style():
+    """True if apps use the dark style, False if light, None if unknown."""
+    value = output("gsettings", "get", "org.gnome.desktop.interface", "color-scheme")
+    if not value:
+        return None
+    return value.strip().strip("'") == "prefer-dark"
+
+
 def output(*cmd):
     try:
         return subprocess.run(cmd, capture_output=True, text=True, timeout=2).stdout
@@ -226,6 +234,9 @@ ICONS = {"high": "", "low": "", "off": "", "muted": "",
          "bat4": "\uf240", "bolt": "\uf0e7", "plug": "\uf1e6"}
 
 CSS = b"""
+/* The panel draws everything itself, so it looks the same whichever GTK
+   theme apps use (dark or light style) */
+* { text-shadow: none; -gtk-icon-shadow: none; }
 window { background-color: transparent; }
 .panel {
     background-color: #16161e;
@@ -304,6 +315,8 @@ separator { background-color: #2a2c3a; min-height: 1px; }
 .mode.first { border-radius: 16px 0 0 16px; }
 .mode.last { border-radius: 0 16px 16px 0; }
 .mode.on { background-color: #7aa2f7; color: #16161e; }
+/* Dark text on highlighted buttons (the general label colour is light) */
+.action.on label, .mode.on label, .icon-button.muted label { color: #16161e; }
 """
 
 
@@ -417,6 +430,11 @@ class Panel(Gtk.Window):
             self.kbd_button = self.add_action(actions, "Keyboard light", None)
             self.kbd_button.connect("clicked", self.toggle_keyboard)
             self.show_keyboard(kbd > 0)
+        dark = dark_style()
+        if dark is not None:
+            self.dark_button = self.add_action(actions, "Dark style", None)
+            self.dark_button.connect("clicked", self.toggle_dark)
+            self.show_dark(dark)
         if volume is not None:
             self.add_action(actions, "Sound settings", "pavucontrol")
         if actions.get_children():
@@ -539,6 +557,17 @@ class Panel(Gtk.Window):
         on = "on" not in self.kbd_button.get_style_context().list_classes()
         run("brightnessctl", "-q", "-d", KBD, "set", "50%" if on else "0")
         self.show_keyboard(on)
+
+    # ---- dark / light style -------------------------------------------------
+
+    def show_dark(self, on):
+        ctx = self.dark_button.get_style_context()
+        (ctx.add_class if on else ctx.remove_class)("on")
+
+    def toggle_dark(self, *_):
+        on = "on" not in self.dark_button.get_style_context().list_classes()
+        run(f"{SCRIPTS}/appearance.sh", "dark" if on else "light")
+        self.show_dark(on)
 
     # ---- window behaviour ---------------------------------------------------
 

@@ -156,6 +156,7 @@
             "wifi-toggle": "~/.config/labwc/scripts/toggle.sh wifi",
             "bluetooth-toggle": "~/.config/labwc/scripts/toggle.sh bluetooth",
             "dnd": "~/.config/labwc/scripts/toggle.sh dnd",
+            "dark-style": "~/.config/labwc/scripts/appearance.sh toggle",
             "screenshot": "~/.config/labwc/scripts/screenshot.sh area",
             "wallpaper": "~/.config/labwc/scripts/wallpaper.sh",
             "scale": "~/.config/labwc/scripts/scale.sh",

@@ -13,6 +13,9 @@
       <action name="Execute" command="foot" />
     </item>
     <separator />
+    <item label="Dark style on/off">
+      <action name="Execute" command="~/.config/labwc/scripts/appearance.sh toggle" />
+    </item>
     <item label="Change wallpaper…">
       <action name="Execute" command="~/.config/labwc/scripts/wallpaper.sh" />
     </item>

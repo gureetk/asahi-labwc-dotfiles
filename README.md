@@ -195,7 +195,7 @@ to the Command key.
 | Right | Volume | Quick settings panel (see below) | Scroll: volume. Right-click: mute |
 | Right | Sun | The same panel | Scroll: brightness |
 | Right | Battery | The same panel | Hover: time left |
-| Far right | Sliders | Quick settings: Wi-Fi, Bluetooth, sound, on/off toggles, Do Not Disturb, screenshot, wallpaper, display scale, shortcuts, power & sleep, lock, suspend, log out, reboot, shut down | |
+| Far right | Sliders | Quick settings: Wi-Fi, Bluetooth, sound, on/off toggles, Do Not Disturb, dark style, screenshot, wallpaper, display scale, shortcuts, power & sleep, lock, suspend, log out, reboot, shut down | |
 
 The **quick settings panel** drops down under the icons, like GNOME's:
 
@@ -205,7 +205,8 @@ The **quick settings panel** drops down under the icons, like GNOME's:
   `tuned-ppd` (installed with GNOME and KDE) or `power-profiles-daemon`;
   without either, the row is hidden. Both run a small background service,
   so they aren't installed on Minimal by default.
-- Buttons for output device, microphone, keyboard light and sound settings
+- Buttons for output device, microphone, keyboard light, dark style and sound
+  settings
 
 Click anywhere outside it, click the icon again or press Esc to close it.
 
@@ -271,6 +272,25 @@ The image is copied into `~/.config/labwc/`, so it stays after reboots even if
 the original is moved or deleted. JPG and PNG work. The lock screen uses the
 same image.
 
+## Dark and light style
+
+Apps follow one dark / light setting, like GNOME's Dark Style switch. Change
+it with the **Dark style** button in the quick settings panel, **Dark style
+on/off** in the sliders or desktop menu, or from a terminal:
+`~/.config/labwc/scripts/appearance.sh dark` (or `light`).
+
+- GNOME and other libadwaita apps, Firefox, Chromium, Electron apps and
+  websites with a dark mode follow it, most of them straight away.
+- Older GTK 3 apps switch between the Adwaita and Adwaita-dark themes. A
+  different GTK theme you've chosen yourself is left alone.
+- Qt apps (KDE apps) don't follow it without extra theming tools.
+- The desktop itself (bar, menus, title bars, notifications, lock screen)
+  stays dark either way, like GNOME's top bar.
+
+The installer sets apps to dark to match the desktop, unless you'd already
+picked a style. It's the same setting GNOME uses, so if GNOME is installed
+too, it follows your choice.
+
 ## Display scale
 
 Open the sliders icon menu → **Display scale…** to make everything bigger or
@@ -296,6 +316,7 @@ uses the new size too.
 | Desktop (right-click) menu | `~/.config/labwc/menu.xml` |
 | What starts at login | `~/.config/labwc/autostart` |
 | Command / Control swap, mouse pointer | `~/.config/labwc/environment` (log out and back in after editing) |
+| Dark or light apps | Quick settings panel → Dark style (or `appearance.sh dark` / `light`) |
 | Display scale | Sliders menu → Display scale (saved in `~/.config/labwc/scale.conf`) |
 | Login screen text size | Sliders menu → Display scale → Login screen text size (or the `FONT=` line in `/etc/vconsole.conf`) |
 | Screen-off, lock and sleep timers | Sliders menu → Power & sleep settings (or `~/.config/labwc/power.conf`) |
@@ -328,7 +349,7 @@ config/
   labwc/scripts/           quick settings panel (quick-panel.py), idle / power settings,
                            pop-up (osd.sh), Wi-Fi / Bluetooth / sound pickers,
                            power menu, screenshots, toggles, wallpaper, display scale,
-                           shortcut list
+                           dark / light style (appearance.sh), shortcut list
   waybar/                  bar layout, style, and the drop-down menus (*_menu.xml)
   fuzzel/fuzzel.ini        launcher
   mako/config              notifications

@@ -53,8 +53,9 @@ packages=(
     lxpolkit xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
     # quick settings panel (sliders, battery, power mode)
     python3-gobject gtk3 gtk-layer-shell upower
-    # saved app settings, e.g. the title bar buttons set below
-    dconf gsettings-desktop-schemas
+    # saved app settings (title bar buttons, dark / light style) and the
+    # dark theme for older GTK 3 apps
+    dconf gsettings-desktop-schemas gnome-themes-extra
     # bigger text on the login screen and text consoles
     terminus-fonts-console
 )
@@ -104,6 +105,18 @@ if command -v gsettings >/dev/null &&
         echo "==> Couldn't save the app title bar buttons. Once dconf is installed, run:"
         echo "    gsettings set ${key[*]} '$layout'"
     fi
+fi
+
+# Apps use the dark style to match the desktop, unless a style was already
+# chosen. Switch any time: quick settings panel -> Dark style.
+if command -v gsettings >/dev/null; then
+    style=$("$cfg/labwc/scripts/appearance.sh" --default 2>/dev/null || echo failed)
+    case "$style" in
+        set)  echo "==> Apps now use the dark style (switch it in the quick settings panel)" ;;
+        kept) ;;
+        *)    echo "==> Couldn't save the dark style. Once dconf is installed, run:"
+              echo "    ~/.config/labwc/scripts/appearance.sh dark" ;;
+    esac
 fi
 
 echo "==> Checking the labwc config"

@@ -37,6 +37,11 @@
       </object>
     </child>
     <child>
+      <object class="GtkMenuItem" id="dark-style">
+        <property name="label">Dark style on/off</property>
+      </object>
+    </child>
+    <child>
       <object class="GtkMenuItem" id="screenshot">
         <property name="label">Screenshot area</property>
       </object>
