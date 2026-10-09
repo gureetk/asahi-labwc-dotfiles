@@ -24,14 +24,12 @@ Openbox.
 On an 8 GB Mac every gigabyte matters. Measured on an M1 with 8 GB, idle
 right after logging in:
 
-<!-- TODO: fresh boot, log in, wait a minute, run `free -h`, and put the
-     "used" number in the "This setup" row -->
 | Desktop | RAM used at idle |
 |---|---|
 | GNOME (Fedora Asahi Remix default) | 2.73 GB |
 | Stock sway | 1.07 GB |
 | asahi-dotfiles (sway) | 1.1 GB |
-| This setup | — |
+| This setup | 855 MB |
 
 Most of the savings come from not running things until you need them:
 
