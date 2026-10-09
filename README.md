@@ -133,6 +133,16 @@ the sway version, so installing one replaces the other's copies of those
 New windows open in the middle of the screen. There are four workspaces:
 Ctrl+1 … Ctrl+4, the numbers on the bar, or scroll on the desktop.
 
+Some apps draw their own title bar instead of using labwc's: browsers (so
+the tabs can sit in it), GNOME and many GTK apps. Their buttons follow GNOME's
+button setting, whose default is close only, so the installer changes it to
+minimize, maximize and close. Your own choice is kept if you've already
+changed it. To set it yourself:
+`gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'`.
+If GNOME is installed too, it shows the same buttons. To give a browser
+labwc's title bar instead, tick **Title Bar** in Firefox's Customize toolbar,
+or right-click Chrome's tab strip → **Use system title bar and borders**.
+
 ## Keyboard
 
 **Command and Control are swapped.** The **Control** key is for desktop

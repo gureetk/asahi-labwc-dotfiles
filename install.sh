@@ -53,6 +53,8 @@ packages=(
     lxpolkit xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
     # quick settings panel (sliders, battery, power mode)
     python3-gobject gtk3 gtk-layer-shell upower
+    # saved app settings, e.g. the title bar buttons set below
+    dconf gsettings-desktop-schemas
     # bigger text on the login screen and text consoles
     terminus-fonts-console
 )
@@ -85,6 +87,24 @@ chmod +x "$cfg/labwc/scripts/"*.sh "$cfg/labwc/scripts/"*.py "$cfg/waybar/script
 
 # Refresh the font cache so the bar icons show up right away
 fc-cache -f >/dev/null 2>&1 || true
+
+# Apps that draw their own title bars (browsers, GNOME and GTK apps) follow
+# GNOME's button setting, whose default shows only the close button. Show
+# minimize, maximize and close, like labwc's own title bars. A layout you've
+# already changed is left alone.
+key=(org.gnome.desktop.wm.preferences button-layout)
+layout=":minimize,maximize,close"
+if command -v gsettings >/dev/null &&
+   [[ "$(gsettings get "${key[@]}" 2>/dev/null)" == "'appmenu:close'" ]]; then
+    gsettings set "${key[@]}" "$layout" 2>/dev/null || true
+    # Read it back from a new process: without dconf the change isn't saved
+    if [[ "$(gsettings get "${key[@]}" 2>/dev/null)" == "'$layout'" ]]; then
+        echo "==> App title bars now show minimize, maximize and close"
+    else
+        echo "==> Couldn't save the app title bar buttons. Once dconf is installed, run:"
+        echo "    gsettings set ${key[*]} '$layout'"
+    fi
+fi
 
 echo "==> Checking the labwc config"
 if command -v xmllint >/dev/null; then
