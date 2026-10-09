@@ -28,8 +28,9 @@ for arg in "$@"; do
 done
 
 packages=(
-    # window manager (labwc), idle, lock, wallpaper, screen off, display scale
-    labwc swayidle swaylock swaybg wlopm wlr-randr
+    # window manager (labwc, plus labwc-session, which lists it on login
+    # screens), idle, lock, wallpaper, screen off, display scale
+    labwc labwc-session swayidle swaylock swaybg wlopm wlr-randr
     # bar, launcher, notifications, terminal
     waybar fuzzel mako foot
     # fonts and icons (bar icons, app icons in the taskbar and title bars)
