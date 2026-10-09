@@ -1,0 +1,12 @@
+# ~/.config/labwc/environment  -  read by labwc at startup (not a shell script:
+# one VARIABLE=value per line, no quotes needed, no comments after a value).
+# Changes apply after logging out and back in.
+
+# Swap Command and Control: Command now acts as Ctrl in apps (Cmd+C copies,
+# Cmd+V pastes), and the Control key becomes the key for desktop shortcuts.
+# Delete this line to go back to the normal layout.
+XKB_DEFAULT_OPTIONS=ctrl:swap_lwin_lctl,ctrl:swap_rwin_rctl
+
+# Mouse pointer
+XCURSOR_THEME=Adwaita
+XCURSOR_SIZE=24

@@ -1,0 +1,47 @@
+# ~/.config/labwc/themerc-override  -  window title bars, menus and pop-ups.
+# Same palette as the bar: background #16161e, accent #7aa2f7.
+# Every option: man 5 labwc-theme. Reload with Ctrl+Shift+C.
+
+border.width: 1
+window.titlebar.padding.width: 6
+window.titlebar.padding.height: 2
+
+window.active.title.bg.color: #1f2029
+window.inactive.title.bg.color: #16161e
+window.active.label.text.color: #e6e6ef
+window.inactive.label.text.color: #8a8ca0
+window.label.text.justify: center
+window.active.border.color: #7aa2f7
+window.inactive.border.color: #2a2c3a
+
+window.button.width: 26
+window.button.height: 26
+window.button.spacing: 2
+window.button.hover.bg.color: #2a2c3a
+window.button.hover.bg.corner-radius: 13
+window.active.button.unpressed.image.color: #e6e6ef
+window.inactive.button.unpressed.image.color: #8a8ca0
+
+menu.border.width: 1
+menu.border.color: #2a2c3a
+menu.items.bg.color: #16161e
+menu.items.text.color: #e6e6ef
+menu.items.active.bg.color: #7aa2f7
+menu.items.active.text.color: #16161e
+menu.items.padding.x: 10
+menu.items.padding.y: 6
+menu.separator.color: #2a2c3a
+menu.title.bg.color: #1f2029
+menu.title.text.color: #e6e6ef
+
+osd.bg.color: #16161e
+osd.border.color: #7aa2f7
+osd.border.width: 1
+osd.label.text.color: #e6e6ef
+osd.window-switcher.style-classic.item.active.border.color: #7aa2f7
+osd.window-switcher.style-classic.item.active.bg.color: #2a2c3a
+
+snapping.overlay.region.bg.color: #7aa2f740
+snapping.overlay.edge.bg.color: #7aa2f740
+snapping.overlay.region.border.color: #7aa2f7
+snapping.overlay.edge.border.color: #7aa2f7

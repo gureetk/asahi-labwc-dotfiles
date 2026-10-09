@@ -1,0 +1,53 @@
+Ctrl = Control key (desktop shortcuts)    Cmd = Command (works as Ctrl in apps)
+-- ESSENTIALS -----------------------------------------------------------
+Ctrl + ?                     This list (Ctrl + Shift + /). Type to search
+Ctrl + D  or  Ctrl + Space   App launcher
+Ctrl + Enter                 Terminal
+Ctrl + Shift + Q             Close window (Option + F4 works too)
+Ctrl + Shift + E             Power menu: lock, suspend, log out, reboot, off
+Ctrl + Cmd + Q               Lock screen (same as macOS)
+Ctrl + Shift + C             Reload labwc and the bar after editing configs
+-- IN APPS (COMMAND KEY) ------------------------------------------------
+Cmd + C / X / V / Z          Copy / cut / paste / undo
+Cmd + A / F / S              Select all / find / save
+Cmd + T / W / Q              New tab / close tab / quit app
+Cmd + Tab                    Next browser tab (Cmd + Shift + Tab: previous)
+Cmd + Shift + C / V          Copy / paste in the terminal
+Cmd + C                      Stop the running command in the terminal
+-- WINDOWS --------------------------------------------------------------
+Option + Tab  or  Ctrl + Tab Switch windows (add Shift to go backwards)
+Ctrl + Up                    Maximize / restore
+Ctrl + Left / Right          Fill the left / right half of the screen
+Ctrl + Down                  Back to normal size after maximize or half
+Ctrl + M                     Minimize (click it in the taskbar to bring it back)
+Ctrl + F                     Fullscreen on/off
+Ctrl + Shift + T             Keep the window above all others on/off
+Option + Space               Window menu (same as right-clicking the title bar)
+-- WORKSPACES -----------------------------------------------------------
+Ctrl + 1 ... 4               Go to workspace 1 ... 4
+Ctrl + Shift + 1 ... 4       Send the window to workspace 1 ... 4
+Ctrl + Option + Left / Right Previous / next workspace
+Scroll on the desktop        Previous / next workspace
+-- TOOLS ----------------------------------------------------------------
+Ctrl + Shift + S             Screenshot an area (saved + copied)
+Ctrl + Cmd + Shift + S       Screenshot the whole screen
+Ctrl + Shift + W             Change wallpaper
+Ctrl + N                     Do Not Disturb on/off
+-- MOUSE ----------------------------------------------------------------
+Drag the title bar           Move the window
+Drag an edge or corner       Resize the window
+Double-click the title bar   Maximize / restore
+Drag to the left/right edge  Fill that half (top edge: maximize, corner: quarter)
+Ctrl + drag                  Move the window from anywhere inside it
+Ctrl + right-drag            Resize the window from anywhere inside it
+Right-click the desktop      Desktop menu: apps, wallpaper, scale, log out...
+-- BAR AND MAC KEYS -----------------------------------------------------
+Taskbar icons                Click: switch to / minimize. Middle-click: close
+Volume / brightness icons    Click: quick settings. Scroll: change level
+Battery icon                 Click: time left, power mode, sliders
+Wi-Fi / Bluetooth icons      Click: drop-down menu
+Clock                        Click: recent notifications. Scroll: calendar
+Sliders icon (top right)     Quick settings, incl. Display scale, Power & sleep
+Top row (F1, F2, F7 - F12)   Brightness, media and volume, as on macOS
+Power button                 Lock and sleep (hold to force the Mac off)
+Closing the lid              Lock and sleep

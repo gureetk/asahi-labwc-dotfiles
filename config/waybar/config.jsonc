@@ -1,0 +1,171 @@
+// ~/.config/waybar/config.jsonc
+// Reload the bar after editing: Ctrl+Shift+C (reloads labwc and waybar)
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "margin-top": 6,
+    "margin-left": 8,
+    "margin-right": 8,
+    "spacing": 6,
+
+    "modules-left": ["custom/launcher", "ext/workspaces", "wlr/taskbar"],
+    "modules-center": ["clock", "custom/dnd"],
+    "modules-right": ["tray", "group/status", "custom/control"],
+
+    "custom/launcher": {
+        "format": "",
+        "tooltip-format": "Apps (Ctrl+D)",
+        "on-click": "fuzzel"
+    },
+
+    // Workspaces 1-4 (Ctrl+1 ... Ctrl+4). Needs Waybar 0.14 or newer.
+    "ext/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "sort-by-id": true
+    },
+
+    // Open windows: click one to switch to it (and its workspace), click the
+    // active one to minimize it, middle-click to close it
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 18,
+        "tooltip-format": "{title}",
+        "on-click": "minimize-raise",
+        "on-click-middle": "close"
+    },
+
+    "clock": {
+        "format": "{:%a %b %d   %H:%M}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "on-click": "~/.config/labwc/scripts/notifications.sh",
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_down",
+            "on-scroll-down": "shift_up"
+        },
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "today": "<span color='#7aa2f7'><b>{}</b></span>"
+            }
+        }
+    },
+
+    "custom/dnd": {
+        "exec": "~/.config/waybar/scripts/dnd-status.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 8,
+        "on-click": "~/.config/labwc/scripts/toggle.sh dnd"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "group/status": {
+        "orientation": "horizontal",
+        "modules": ["network", "bluetooth", "pulseaudio", "backlight", "battery"]
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "format-disabled": "",
+        "tooltip-format-wifi": "{essid}  ({signalStrength}%)\n{ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+        "tooltip-format-disconnected": "Not connected",
+        "tooltip-format-disabled": "Wi-Fi is off",
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/network_menu.xml",
+        "menu-actions": {
+            "wifi-pick": "~/.config/labwc/scripts/wifi.sh",
+            "wifi-toggle": "~/.config/labwc/scripts/toggle.sh wifi",
+            "net-settings": "nm-connection-editor"
+        }
+    },
+
+    "bluetooth": {
+        "format": "",
+        "format-off": "",
+        "format-disabled": "",
+        "format-connected": "",
+        "format-no-controller": "",
+        "tooltip-format": "Bluetooth: {status}",
+        "tooltip-format-connected": "Connected:\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/bluetooth_menu.xml",
+        "menu-actions": {
+            "bt-pick": "~/.config/labwc/scripts/bluetooth.sh",
+            "bt-toggle": "~/.config/labwc/scripts/toggle.sh bluetooth",
+            "bt-pair": "blueman-manager"
+        },
+        "on-click-right": "~/.config/labwc/scripts/toggle.sh bluetooth"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "tooltip-format": "{desc}: {volume}%\n\nClick for sliders, scroll to change, right-click to mute",
+        "on-scroll-up": "~/.config/labwc/scripts/osd.sh volume up",
+        "on-scroll-down": "~/.config/labwc/scripts/osd.sh volume down",
+        "on-click": "~/.config/labwc/scripts/quick-panel.py",
+        "on-click-right": "~/.config/labwc/scripts/osd.sh volume mute"
+    },
+
+    "backlight": {
+        "format": "",
+        "tooltip-format": "Brightness {percent}%\n\nClick for sliders, scroll to change",
+        "on-scroll-up": "~/.config/labwc/scripts/osd.sh brightness up",
+        "on-scroll-down": "~/.config/labwc/scripts/osd.sh brightness down",
+        "on-click": "~/.config/labwc/scripts/quick-panel.py"
+    },
+
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 12
+        },
+        "format": "<span font_family='Font Awesome 6 Free' font_weight='900'>{icon}</span>  {capacity}%",
+        "format-charging": "<span font_family='Font Awesome 6 Free' font_weight='900'></span>  {capacity}%",
+        "format-plugged": "<span font_family='Font Awesome 6 Free' font_weight='900'></span>  {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{timeTo}\n\nClick for details and power mode",
+        "on-click": "~/.config/labwc/scripts/quick-panel.py"
+    },
+
+    "custom/control": {
+        "format": "",
+        "tooltip-format": "Quick settings",
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/control_menu.xml",
+        "menu-actions": {
+            "wifi": "~/.config/labwc/scripts/wifi.sh",
+            "bluetooth": "~/.config/labwc/scripts/bluetooth.sh",
+            "sound": "pavucontrol",
+            "wifi-toggle": "~/.config/labwc/scripts/toggle.sh wifi",
+            "bluetooth-toggle": "~/.config/labwc/scripts/toggle.sh bluetooth",
+            "dnd": "~/.config/labwc/scripts/toggle.sh dnd",
+            "screenshot": "~/.config/labwc/scripts/screenshot.sh area",
+            "wallpaper": "~/.config/labwc/scripts/wallpaper.sh",
+            "scale": "~/.config/labwc/scripts/scale.sh",
+            "keybinds": "~/.config/labwc/scripts/keybinds.sh",
+            "power-settings": "~/.config/labwc/scripts/power-settings.sh",
+            "lock": "~/.config/labwc/scripts/lock.sh",
+            "suspend": "systemctl suspend",
+            "logout": "labwc --exit",
+            "reboot": "systemctl reboot",
+            "poweroff": "systemctl poweroff"
+        }
+    }
+}

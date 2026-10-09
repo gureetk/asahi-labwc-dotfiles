@@ -1,0 +1,25 @@
+# ~/.config/labwc/autostart  -  runs once when labwc starts (a shell script).
+# Everything that stays running in the background is started here, so this
+# is the list to check when you want to know what uses memory.
+
+scripts=~/.config/labwc/scripts
+
+# Display scale and wallpaper first, so the bar starts at the right size
+"$scripts/scale.sh" --restore
+"$scripts/wallpaper.sh" --restore
+
+# Top bar, notifications, password prompts for apps that need admin rights
+waybar >/dev/null 2>&1 &
+mako >/dev/null 2>&1 &
+lxpolkit >/dev/null 2>&1 &
+
+# Screen off, lock and sleep timers (Power & sleep settings), locking before
+# any sleep (lid closed, power button) and screen back on after waking
+"$scripts/idle.sh" >/dev/null 2>&1 &
+
+# Power button: a short press puts the Mac to sleep (rc.xml), like GNOME.
+# Without this, systemd shuts down on the same press. labwc takes over the
+# button only while it runs: the inhibitor ends when labwc does.
+systemd-inhibit --what=handle-power-key --mode=block --who=labwc \
+    --why="Power button puts the Mac to sleep" \
+    tail -f /dev/null --pid="$LABWC_PID" >/dev/null 2>&1 &

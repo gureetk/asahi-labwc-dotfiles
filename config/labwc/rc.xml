@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!--
+  ~/.config/labwc/rc.xml  -  windows, keyboard shortcuts, mouse and touchpad
+
+  Reload after editing: Ctrl+Shift+C (or right-click the desktop -> Reload).
+  Every option: man 5 labwc-config. Actions: man 5 labwc-actions.
+
+  Command and Control are swapped (see the environment file), so in this file
+  "W-" (Super) is the Control key on the Mac keyboard and "C-" (Ctrl) is the
+  Command key. Command works like Ctrl does on other computers (Cmd+C, Cmd+V).
+  Press Ctrl+? (Ctrl+Shift+/) for a searchable list of every shortcut.
+-->
+<labwc_config>
+
+  <core>
+    <decoration>server</decoration>
+    <!-- Space between snapped / maximized windows and the screen edges -->
+    <gap>6</gap>
+  </core>
+
+  <!-- New windows open in the middle of the screen -->
+  <placement>
+    <policy>center</policy>
+  </placement>
+
+  <theme>
+    <titlebar>
+      <!-- App icon on the left; minimize, maximize and close on the right -->
+      <layout>icon:iconify,max,close</layout>
+      <showTitle>yes</showTitle>
+    </titlebar>
+    <cornerRadius>10</cornerRadius>
+    <dropShadows>yes</dropShadows>
+    <font place="ActiveWindow"><name>sans</name><size>10</size><weight>bold</weight></font>
+    <font place="InactiveWindow"><name>sans</name><size>10</size><weight>normal</weight></font>
+    <font place="MenuHeader"><name>sans</name><size>10</size><weight>bold</weight></font>
+    <font place="MenuItem"><name>sans</name><size>10</size></font>
+    <font place="OnScreenDisplay"><name>sans</name><size>11</size></font>
+  </theme>
+
+  <!-- Alt+Tab / Ctrl+Tab window switcher -->
+  <windowSwitcher preview="yes" outlines="yes">
+    <osd show="yes" style="classic" output="focused" />
+    <fields>
+      <field content="icon" width="6%" />
+      <field content="desktop_entry_name" width="28%" />
+      <field content="title" width="66%" />
+    </fields>
+  </windowSwitcher>
+
+  <!-- Drag a window to the left or right edge to fill that half, to the top
+       to maximize it, or to a corner for a quarter -->
+  <snapping>
+    <range inner="10" outer="10" />
+    <cornerRange>50</cornerRange>
+    <overlay enabled="yes">
+      <delay inner="300" outer="300" />
+    </overlay>
+    <topMaximize>yes</topMaximize>
+  </snapping>
+
+  <!-- Four workspaces: Ctrl+1 ... Ctrl+4, or click the numbers in the bar -->
+  <desktops>
+    <popupTime>600</popupTime>
+    <names>
+      <name>1</name>
+      <name>2</name>
+      <name>3</name>
+      <name>4</name>
+    </names>
+  </desktops>
+
+  <keyboard>
+    <repeatRate>40</repeatRate>
+    <repeatDelay>300</repeatDelay>
+
+    <!-- Essentials ===================================================== -->
+    <!-- Shortcut list: Ctrl+? (Ctrl+Shift+/) or Ctrl+/ -->
+    <keybind key="W-slash"><action name="Execute" command="~/.config/labwc/scripts/keybinds.sh" /></keybind>
+    <keybind key="W-S-slash"><action name="Execute" command="~/.config/labwc/scripts/keybinds.sh" /></keybind>
+    <keybind key="W-S-question"><action name="Execute" command="~/.config/labwc/scripts/keybinds.sh" /></keybind>
+    <!-- App launcher -->
+    <keybind key="W-space"><action name="Execute" command="fuzzel" /></keybind>
+    <keybind key="W-d"><action name="Execute" command="fuzzel" /></keybind>
+    <!-- Terminal -->
+    <keybind key="W-Return"><action name="Execute" command="foot" /></keybind>
+    <!-- Close the window (Option+F4 works too) -->
+    <keybind key="W-S-q"><action name="Close" /></keybind>
+    <keybind key="A-F4"><action name="Close" /></keybind>
+    <!-- Power menu: lock, suspend, log out, reboot, shut down -->
+    <keybind key="W-S-e"><action name="Execute" command="~/.config/labwc/scripts/powermenu.sh" /></keybind>
+    <!-- Lock the screen: Ctrl+Cmd+Q, same as macOS -->
+    <keybind key="W-C-q"><action name="Execute" command="~/.config/labwc/scripts/lock.sh" /></keybind>
+    <!-- Reload this file and the bar -->
+    <keybind key="W-S-c">
+      <action name="Reconfigure" />
+      <action name="Execute" command="pkill -SIGUSR2 waybar" />
+    </keybind>
+
+    <!-- Windows ======================================================== -->
+    <!-- Switch windows: Option+Tab or Ctrl+Tab (add Shift to go backwards) -->
+    <keybind key="A-Tab"><action name="NextWindow" /></keybind>
+    <keybind key="A-S-Tab"><action name="PreviousWindow" /></keybind>
+    <keybind key="W-Tab"><action name="NextWindow" /></keybind>
+    <keybind key="W-S-Tab"><action name="PreviousWindow" /></keybind>
+    <!-- Maximize / restore, left or right half, minimize, fullscreen -->
+    <keybind key="W-Up"><action name="ToggleMaximize" /></keybind>
+    <keybind key="W-Down"><action name="UnMaximize" /><action name="UnSnap" /></keybind>
+    <keybind key="W-Left"><action name="SnapToEdge" direction="left" /></keybind>
+    <keybind key="W-Right"><action name="SnapToEdge" direction="right" /></keybind>
+    <keybind key="W-m"><action name="Iconify" /></keybind>
+    <keybind key="W-f"><action name="ToggleFullscreen" /></keybind>
+    <!-- Keep the window above all others -->
+    <keybind key="W-S-t"><action name="ToggleAlwaysOnTop" /></keybind>
+    <!-- Window menu (same as right-clicking the title bar) -->
+    <keybind key="A-space"><action name="ShowMenu" menu="client-menu" atCursor="no" /></keybind>
+
+    <!-- Workspaces ===================================================== -->
+    <keybind key="W-1"><action name="GoToDesktop" to="1" /></keybind>
+    <keybind key="W-2"><action name="GoToDesktop" to="2" /></keybind>
+    <keybind key="W-3"><action name="GoToDesktop" to="3" /></keybind>
+    <keybind key="W-4"><action name="GoToDesktop" to="4" /></keybind>
+    <keybind key="W-S-1"><action name="SendToDesktop" to="1" follow="no" /></keybind>
+    <keybind key="W-S-2"><action name="SendToDesktop" to="2" follow="no" /></keybind>
+    <keybind key="W-S-3"><action name="SendToDesktop" to="3" follow="no" /></keybind>
+    <keybind key="W-S-4"><action name="SendToDesktop" to="4" follow="no" /></keybind>
+    <!-- Previous / next workspace: Ctrl+Option+left/right -->
+    <keybind key="W-A-Left"><action name="GoToDesktop" to="left" /></keybind>
+    <keybind key="W-A-Right"><action name="GoToDesktop" to="right" /></keybind>
+
+    <!-- Tools ========================================================== -->
+    <!-- Screenshots: saved to ~/Pictures/Screenshots and copied -->
+    <keybind key="W-S-s"><action name="Execute" command="~/.config/labwc/scripts/screenshot.sh area" /></keybind>
+    <keybind key="W-C-S-s"><action name="Execute" command="~/.config/labwc/scripts/screenshot.sh full" /></keybind>
+    <!-- Do Not Disturb on/off -->
+    <keybind key="W-n"><action name="Execute" command="~/.config/labwc/scripts/toggle.sh dnd" /></keybind>
+    <!-- Pick a wallpaper -->
+    <keybind key="W-S-w"><action name="Execute" command="~/.config/labwc/scripts/wallpaper.sh" /></keybind>
+
+    <!-- Mac keys (these also work on the lock screen) ==================== -->
+    <!-- Volume and brightness show a pop-up with the new level -->
+    <keybind key="XF86MonBrightnessUp" allowWhenLocked="yes"><action name="Execute" command="~/.config/labwc/scripts/osd.sh brightness up" /></keybind>
+    <keybind key="XF86MonBrightnessDown" allowWhenLocked="yes"><action name="Execute" command="~/.config/labwc/scripts/osd.sh brightness down" /></keybind>
+    <keybind key="XF86KbdBrightnessUp" allowWhenLocked="yes"><action name="Execute" command="~/.config/labwc/scripts/osd.sh keyboard up" /></keybind>
+    <keybind key="XF86KbdBrightnessDown" allowWhenLocked="yes"><action name="Execute" command="~/.config/labwc/scripts/osd.sh keyboard down" /></keybind>
+    <keybind key="XF86AudioRaiseVolume" allowWhenLocked="yes"><action name="Execute" command="~/.config/labwc/scripts/osd.sh volume up" /></keybind>
+    <keybind key="XF86AudioLowerVolume" allowWhenLocked="yes"><action name="Execute" command="~/.config/labwc/scripts/osd.sh volume down" /></keybind>
+    <keybind key="XF86AudioMute" allowWhenLocked="yes"><action name="Execute" command="~/.config/labwc/scripts/osd.sh volume mute" /></keybind>
+    <keybind key="XF86AudioPlay" allowWhenLocked="yes"><action name="Execute" command="playerctl play-pause" /></keybind>
+    <keybind key="XF86AudioNext" allowWhenLocked="yes"><action name="Execute" command="playerctl next" /></keybind>
+    <keybind key="XF86AudioPrev" allowWhenLocked="yes"><action name="Execute" command="playerctl previous" /></keybind>
+    <!-- Power button: a short press puts the Mac to sleep, like GNOME. The
+         autostart file stops systemd from shutting down on the same press. -->
+    <keybind key="XF86PowerOff" allowWhenLocked="yes" onRelease="yes"><action name="Execute" command="~/.config/labwc/scripts/power-button.sh" /></keybind>
+  </keyboard>
+
+  <mouse>
+    <!-- Standard behaviour: drag the title bar to move, drag an edge or corner
+         to resize, double-click the title bar to maximize, buttons on the
+         right to minimize / maximize / close. Ctrl+drag anywhere in a window
+         moves it, Ctrl+right-drag resizes it. -->
+    <default />
+    <!-- Right-click the desktop for the desktop menu; a left click does
+         nothing (scrolling on the desktop still switches workspaces) -->
+    <context name="Root">
+      <mousebind button="Left" action="Press"><action name="None" /></mousebind>
+    </context>
+    <!-- Scrolling on a title bar doesn't roll the window up -->
+    <context name="TitleBar">
+      <mousebind direction="Up" action="Scroll"><action name="None" /></mousebind>
+      <mousebind direction="Down" action="Scroll"><action name="None" /></mousebind>
+    </context>
+  </mouse>
+
+  <libinput>
+    <device category="touchpad">
+      <tap>yes</tap>
+      <naturalScroll>yes</naturalScroll>
+      <!-- Turn the touchpad off while typing -->
+      <disableWhileTyping>yes</disableWhileTyping>
+      <!-- Two-finger click = right click, like macOS -->
+      <clickMethod>clickfinger</clickMethod>
+    </device>
+  </libinput>
+
+  <windowRules>
+    <!-- Settings windows open centered at a comfortable size -->
+    <windowRule identifier="pavucontrol"><action name="ResizeTo" width="760" height="540" /><action name="AutoPlace" policy="center" /></windowRule>
+    <windowRule identifier="org.pulseaudio.pavucontrol"><action name="ResizeTo" width="760" height="540" /><action name="AutoPlace" policy="center" /></windowRule>
+    <windowRule identifier="blueman-manager"><action name="ResizeTo" width="760" height="540" /><action name="AutoPlace" policy="center" /></windowRule>
+    <windowRule identifier="nm-connection-editor"><action name="ResizeTo" width="760" height="540" /><action name="AutoPlace" policy="center" /></windowRule>
+    <!-- Quick settings panel, only used if gtk-layer-shell is missing:
+         no title bar, top-right corner under the bar, above other windows -->
+    <windowRule identifier="quick-panel" serverDecoration="no" skipTaskbar="yes" skipWindowSwitcher="yes">
+      <action name="MoveToEdge" direction="right" snapWindows="no" />
+      <action name="MoveToEdge" direction="up" snapWindows="no" />
+      <action name="ToggleAlwaysOnTop" />
+    </windowRule>
+  </windowRules>
+
+</labwc_config>
