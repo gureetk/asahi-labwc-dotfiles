@@ -9,7 +9,7 @@ lock screen, screenshots and a wallpaper picker. Command and Control are
 swapped, so Cmd+C and Cmd+V work like on macOS.
 
 It's the stacking-window version of
-[asahi-dotfiles](https://codeberg.org/gureetk/asahi-dotfiles), which does the
+[asahi-dotfiles](https://codeberg.org/gureetk/asahi-sway-dotfiles), which does the
 same with the sway tiling window manager. The window manager here is
 [labwc](https://labwc.github.io), a small Wayland compositor in the spirit of
 Openbox.
@@ -85,8 +85,8 @@ the top of `install.sh` yourself and copy the `config/` folders into
 
 <!-- TODO: put this repo's address in the first line -->
 ```
-git clone https://codeberg.org/gureetk/YOUR-REPO.git
-cd YOUR-REPO
+git clone https://codeberg.org/gureetk/asahi-labwc-dotfiles.git
+cd asahi-labwc-dotfiles
 ./install.sh --greetd
 ```
 
